@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pulse Animation</title>
+  <style>
+    .pulse {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: blue;
+      animation: pulseAnim 1s infinite alternate;
+    }
+
+    @keyframes pulseAnim {
+      from { transform: scale(1); }
+      to   { transform: scale(1.2); }
+    }
+  </style>
+</head>
+<body>
+  <div class="pulse"></div>
+</body>
+</html>

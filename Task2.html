@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Animation Tasks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+
+    h2 {
+      margin-top: 40px;
+      color: #333;
+    }
+
+    .task-container {
+      margin-bottom: 40px;
+    }
+
+    .box, .circle, .bouncer, .mover, .box1, .box2, .box3, .box4, .grow-box, .pauser, .loader {
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+      background: #3498db;
+    }
+
+    /* Task 1 */
+    .box {
+      animation-name: moveRight;
+      animation-duration: 2s;
+    }
+
+    @keyframes moveRight {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(200px); }
+    }
+
+    /* Task 2 */
+    .circle {
+      border-radius: 50%;
+      background: #e74c3c;
+      animation: changeColor 2s ease 1s forwards;
+    }
+
+    @keyframes changeColor {
+      0% { background: #e74c3c; }
+      100% { background: #2ecc71; }
+    }
+
+    /* Task 3 */
+    .bouncer {
+      background: #9b59b6;
+      animation: bounce 0.5s ease-in-out 5;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-50px); }
+    }
+
+    /* Task 4 */
+    .mover {
+      background: #f39c12;
+      animation: moveBackForth 2s linear 2 alternate;
+    }
+
+    @keyframes moveBackForth {
+      from { transform: translateX(0); }
+      to { transform: translateX(200px); }
+    }
+
+    /* Task 5 */
+    .box1, .box2, .box3, .box4 {
+      display: inline-block;
+      animation-name: timingTest;
+      animation-duration: 2s;
+    }
+
+    .box1 { animation-timing-function: linear; background: #1abc9c; }
+    .box2 { animation-timing-function: ease; background: #2ecc71; }
+    .box3 { animation-timing-function: ease-in; background: #e67e22; }
+    .box4 { animation-timing-function: ease-in-out; background: #e74c3c; }
+
+    @keyframes timingTest {
+      from { transform: translateX(0); }
+      to { transform: translateX(200px); }
+    }
+
+    /* Task 6 */
+    .grow-box {
+      background: #16a085;
+      animation: grow 2s forwards;
+    }
+
+    @keyframes grow {
+      from { transform: scale(1); }
+      to { transform: scale(1.5); }
+    }
+
+    /* Task 7 */
+    .box.backwards {
+      background: #8e44ad;
+      animation: shrink 2s backwards;
+    }
+
+    @keyframes shrink {
+      from { transform: scale(0.5); }
+      to { transform: scale(1); }
+    }
+
+    /* Task 8 */
+    .pauser {
+      background: #2c3e50;
+      animation: rotate 2s infinite linear;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Task 9 */
+    .loader {
+      width: 100px;
+      height: 20px;
+      background: #bdc3c7;
+      animation: loadBar 3s ease-in-out 3 alternate forwards;
+    }
+
+    @keyframes loadBar {
+      0% { width: 0; background: #34495e; }
+      50% { background: #1abc9c; }
+      100% { width: 300px; background: #2ecc71; }
+    }
+
+    /* Task 10 */
+    .button {
+      position: relative;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #2980b9;
+      color: white;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .button::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      transition: width 0.5s;
+      z-index: 0;
+    }
+
+    .button:hover::after {
+      width: 100%;
+    }
+
+    .button:hover {
+      background: #3498db;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Task 1: animation-name, animation-duration</h2>
+  <div class="task-container"><div class="box"></div></div>
+
+  <h2>Task 2: animation-delay</h2>
+  <div class="task-container"><div class="circle"></div></div>
+
+  <h2>Task 3: animation-iteration-count</h2>
+  <div class="task-container"><div class="bouncer"></div></div>
+
+  <h2>Task 4: animation-direction</h2>
+  <div class="task-container"><div class="mover"></div></div>
+
+  <h2>Task 5: animation-timing-function</h2>
+  <div class="task-container">
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <div class="box4"></div>
+  </div>
+
+  <h2>Task 6: animation-fill-mode: forwards</h2>
+  <div class="task-container"><div class="grow-box"></div></div>
+
+  <h2>Task 7: animation-fill-mode: backwards</h2>
+  <div class="task-container"><div class="box backwards"></div></div>
+
+  <h2>Task 8: animation-play-state</h2>
+  <div class="task-container">
+    <div class="pauser" id="animateBox"></div>
+    <br><br>
+    <button onclick="togglePlay()">Pause/Play</button>
+  </div>
+
+  <h2>Task 9: All animation properties</h2>
+  <div class="task-container"><div class="loader"></div></div>
+
+  <h2>Task 10: ::after + hover</h2>
+  <div class="task-container"><button class="button">Hover me</button></div>
+
+  <script>
+    function togglePlay() {
+      const box = document.getElementById('animateBox');
+      const state = getComputedStyle(box).animationPlayState;
+      box.style.animationPlayState = state === 'paused' ? 'running' : 'paused';
+    }
+  </script>
+
+</body>
+</html>

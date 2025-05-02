@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSS Animation Properties Playground</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .label {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .box {
+      width: 60px;
+      height: 60px;
+      background-color: #3498db;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    /* Reusable animation */
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(200px); }
+    }
+
+    /* 1. animation-name */
+    .anim-name {
+      animation-name: slide;
+      animation-duration: 2s;
+    }
+
+    /* 2. animation-duration */
+    .anim-duration {
+      animation-name: slide;
+      animation-duration: 4s; /* Slower animation */
+    }
+
+    /* 3. animation-delay */
+    .anim-delay {
+      animation-name: slide;
+      animation-duration: 2s;
+      animation-delay: 2s; /* Starts after 2s */
+    }
+
+    /* 4. animation-iteration-count */
+    .anim-iteration {
+      animation-name: slide;
+      animation-duration: 1.5s;
+      animation-iteration-count: 3; /* Repeats 3 times */
+    }
+
+    /* 5. animation-direction */
+    .anim-direction {
+      animation-name: slide;
+      animation-duration: 2s;
+      animation-direction: alternate; /* Goes forward then backward */
+      animation-iteration-count: infinite;
+    }
+
+    /* 6. animation-timing-function */
+    .anim-timing {
+      animation-name: slide;
+      animation-duration: 2s;
+      animation-timing-function: ease-in-out; /* Smooth acceleration/deceleration */
+      animation-iteration-count: infinite;
+    }
+
+    /* 7. animation-fill-mode */
+    .anim-fill {
+      animation-name: slide;
+      animation-duration: 2s;
+      animation-fill-mode: forwards; /* Retains end position */
+    }
+
+    /* 8. animation-play-state */
+    .anim-play {
+      animation-name: slide;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-play-state: paused;
+    }
+
+    .controls {
+      margin-top: 10px;
+    }
+
+    .slider {
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 CSS Animation Properties Playground</h1>
+
+  <!-- 1. animation-name -->
+  <div class="section">
+    <div class="label">1. animation-name</div>
+    <div class="box anim-name"></div>
+  </div>
+
+  <!-- 2. animation-duration -->
+  <div class="section">
+    <div class="label">2. animation-duration (4s)</div>
+    <div class="box anim-duration"></div>
+  </div>
+
+  <!-- 3. animation-delay -->
+  <div class="section">
+    <div class="label">3. animation-delay (starts after 2s)</div>
+    <div class="box anim-delay"></div>
+  </div>
+
+  <!-- 4. animation-iteration-count -->
+  <div class="section">
+    <div class="label">4. animation-iteration-count (3 times)</div>
+    <div class="box anim-iteration"></div>
+  </div>
+
+  <!-- 5. animation-direction -->
+  <div class="section">
+    <div class="label">5. animation-direction (alternate)</div>
+    <div class="box anim-direction"></div>
+  </div>
+
+  <!-- 6. animation-timing-function -->
+  <div class="section">
+    <div class="label">6. animation-timing-function (ease-in-out)</div>
+    <div class="box anim-timing"></div>
+  </div>
+
+  <!-- 7. animation-fill-mode -->
+  <div class="section">
+    <div class="label">7. animation-fill-mode (forwards)</div>
+    <div class="box anim-fill"></div>
+  </div>
+
+  <!-- 8. animation-play-state with toggle -->
+  <div class="section">
+    <div class="label">8. animation-play-state (toggle)</div>
+    <div class="box anim-play" id="playBox"></div>
+    <div class="controls">
+      <button onclick="toggleAnimation()">▶️ Toggle Play/Pause</button>
+    </div>
+  </div>
+
+  <!-- Bonus: Duration slider -->
+  <div class="section">
+    <div class="label">🎛️ Control animation-duration</div>
+    <input type="range" id="durationSlider" class="slider" min="1" max="10" step="1" value="2" oninput="updateDuration(this.value)">
+    <span id="durationValue">2s</span>
+    <div class="box" id="durationBox"></div>
+  </div>
+
+  <script>
+    const playBox = document.getElementById('playBox');
+    let isPlaying = false;
+
+    function toggleAnimation() {
+      isPlaying = !isPlaying;
+      playBox.style.animationPlayState = isPlaying ? 'running' : 'paused';
+    }
+
+    const durationBox = document.getElementById('durationBox');
+    durationBox.style.animation = 'slide 2s infinite';
+
+    function updateDuration(value) {
+      document.getElementById('durationValue').textContent = value + 's';
+      durationBox.style.animation = `slide ${value}s infinite`;
+    }
+  </script>
+</body>
+</html>
